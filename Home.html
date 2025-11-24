@@ -1,11 +1,398 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Merry Christmas</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Celestia - 2025</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Georgia", serif;
+        background-color: #f8f5f0;
+        color: #2d3436;
+        line-height: 1.6;
+      }
+
+      /* Hero Section with Slider */
+      .hero {
+        position: relative;
+        height: 100vh;
+        min-height: 500px;
+        overflow: hidden;
+        background-color: #1a3a1a;
+      }
+
+      .slider {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
+      }
+
+      .slide.active {
+        opacity: 1;
+      }
+
+      .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.7);
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          rgba(26, 58, 26, 0.6),
+          rgba(139, 0, 0, 0.4)
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        z-index: 10;
+      }
+
+      .hero-content h1 {
+        font-size: 4rem;
+        color: #fff;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        animation: fadeInDown 1s ease-out;
+      }
+      .hero-content h2 {
+        font-size: 3rem;
+        color: white;
+      }
+      .hero-content p {
+        font-size: 1.5rem;
+        color: #f0e6d2;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      .slider-dots {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 20;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .dot.active {
+        background-color: #fff;
+        transform: scale(1.3);
+      }
+
+      /* Event Details Section */
+      .event-details {
+        max-width: 1000px;
+        margin: 80px auto;
+        padding: 0 20px;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #8b0000;
+        margin-bottom: 50px;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 3px;
+        background-color: #1a5a1a;
+        margin: 15px auto 0;
+      }
+
+      .invitation-message {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 50px;
+        line-height: 1.8;
+        font-style: italic;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .detail-card {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        text-align: center;
+      }
+
+      .detail-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(139, 0, 0, 0.2);
+      }
+
+      .detail-card h3 {
+        color: #1a5a1a;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .detail-card p {
+        color: #666;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      .detail-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: #8b0000;
+      }
+
+      /* Footer */
+      footer {
+        background: linear-gradient(135deg, #1a3a1a 0%, #8b0000 100%);
+        color: #f0e6d2;
+        text-align: center;
+        padding: 30px 20px;
+        margin-top: 80px;
+      }
+
+      footer p {
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+      }
+
+      /* Animations */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero-content h1 {
+          font-size: 3rem;
+        }
+        .hero-content h2 {
+          font-size: 2rem;
+        }
+        .hero-content p {
+          font-size: 1.1rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .details-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .invitation-message {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+        .hero-content h2 {
+          font-size: 1.5rem;
+        }
+        .hero-content p {
+          font-size: 1rem;
+        }
+
+        .detail-card {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section with Image Slider -->
+    <section class="hero">
+      <div class="slider">
+        <div class="slide active">
+          <img src="./Assets/Hero1.jpeg" alt="Christmas Carol 1" />
+        </div>
+        <div class="slide">
+          <img src="./Assets/Hero2.jpeg" alt="Christmas Carol 2" />
+        </div>
+        <div class="slide">
+          <img src="./Assets/Hero3.jpeg" alt="Christmas Carol 3" />
+        </div>
+        <div class="slide">
+          <img src="./Assets/Hero4.jpeg" alt="Christmas Carol 4" />
+        </div>
+      </div>
+
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <h1>Celestia - 2025</h1>
+          <h2>Carol Cart</h2>
+          <p>Join us in celebrating the spirit of Christmas</p>
+        </div>
+      </div>
+
+      <div class="slider-dots">
+        <span class="dot active" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+    </section>
+
+    <!-- Event Details Section -->
+    <section class="event-details">
+      <h2 class="section-title">Event Details</h2>
+
+      <div class="invitation-message">
+        <p>
+          We warmly invite you to join us for an evening of joyful celebration
+          and heartfelt carol singing. Come together with fellow students and
+          experience the true spirit of Christmas through music, fellowship, and
+          shared blessings. Your presence will make this celebration even more
+          special!
+        </p>
+      </div>
+
+      <div class="details-grid">
+        <div class="detail-card">
+          <div class="detail-icon">📅</div>
+          <h3>Date</h3>
+          <p>December 09, 2025</p>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">🕐</div>
+          <h3>Time</h3>
+          <p>5:00 PM - 9:00 PM</p>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">📍</div>
+          <h3>Venue</h3>
+          <p>University Main Auditorium<br />Sabaragamuwa University</p>
+        </div>
+
+        <!-- <div class="detail-card">
+          <div class="detail-icon">🎄</div>
+          <h3>Theme</h3>
+          <p>Joy to the World:<br />A Celebration of Peace & Hope</p>
+        </div> -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        Catholic and Christian Movement – Sabaragamuwa University of Sri Lanka
+      </p>
+    </footer>
+
+    <script>
+      let slideIndex = 0;
+      let slides = document.querySelectorAll(".slide");
+      let dots = document.querySelectorAll(".dot");
+      let slideInterval;
+
+      function showSlide(n) {
+        // Remove active class from all slides and dots
+        slides.forEach((slide) => slide.classList.remove("active"));
+        dots.forEach((dot) => dot.classList.remove("active"));
+
+        // Wrap around if index is out of bounds
+        if (n >= slides.length) {
+          slideIndex = 0;
+        } else if (n < 0) {
+          slideIndex = slides.length - 1;
+        } else {
+          slideIndex = n;
+        }
+
+        // Add active class to current slide and dot
+        slides[slideIndex].classList.add("active");
+        dots[slideIndex].classList.add("active");
+      }
+
+      function nextSlide() {
+        showSlide(slideIndex + 1);
+      }
+
+      function currentSlide(n) {
+        // Reset the interval when manually selecting a slide
+        clearInterval(slideInterval);
+        showSlide(n);
+        slideInterval = setInterval(nextSlide, 4000);
+      }
+
+      // Auto-advance slides every 4 seconds
+      slideInterval = setInterval(nextSlide, 4000);
+
+      // Initialize first slide
+      showSlide(0);
+    </script>
+  </body>
 </html>
